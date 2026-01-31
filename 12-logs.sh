@@ -11,10 +11,10 @@ fi
 mkdir -p $LOGS_FOLDER
 VALIDATE(){
     if [ $1 -ne 0 ]; then
-        echo "$2 ......FAILURE"
+        echo "$2 ......FAILURE" | tee -a $LOGS_FILE
         exit1
     else
-         echo "$2..... SUCCESS"
+         echo "$2..... SUCCESS" | tee -a $LOGS_FILE
     fi
 }
 
@@ -24,5 +24,5 @@ VALIDATE $? "Installing Nginx"
 dnf install mysql -y &>> $LOGS_FILE
 VALIDATE $? "Installing mysql"
 
-dnf install nodejs -y &>> $LOGS_FILE
+dnf install nodejs -y &>> $LOGS_FILE    
 VALIDATE $? "Installing Nodejs"
